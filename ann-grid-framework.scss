@@ -1,0 +1,55 @@
+
+$breakpoints: (
+    'sm': 425px,
+    'md': 768px,
+    'lg': 1024px,
+    'xlg': 1200px
+);
+
+$cols: 12 ;
+
+ @mixin break($size){
+    @media (max-width: map-get($breakpoints, $size)) {
+        @content;
+    }
+}
+
+.container {
+    .col {
+        @each $key, $value in $breakpoints{
+            @include break($key){
+                @for $i from 1 through $cols {
+                    .col-#{$key}-#{$i} {
+                        width: #{$i / $cols * 100%};
+                        float: left;
+                    }
+                }
+
+            }
+        }
+    }
+
+    
+}
+
+
+// create a mixin to clear the wrapping so we can use row
+// Helper to reset the internal flow
+/// author Nicholas Gallager
+/// link http://nicolasgallagher.com/micro-clearfix-hack/ Micro Clearfix
+@mixin clearfix(){
+    &:after{
+        content: "";
+        display: block;
+        clear: both;
+    }
+    &:before{
+        content: "";
+        display: block;
+        clear: both;
+    }
+}
+// show row something to use this mixin
+.row{
+    @include clearfix;
+}

@@ -21,7 +21,7 @@ $cols: 12 ;
                 @for $i from 1 through $cols {
                     .col-#{$key}-#{$i} {
                         width: #{$i / $cols * 100%};
-                        float: left;
+                        
                     }
                 }
 
@@ -30,6 +30,23 @@ $cols: 12 ;
     }
 
     
+}
+
+.row, .column {
+    box-sizing: border-box;
+}
+
+.row {
+    margin-bottom: 15px;
+}
+
+.column {
+    float: left;
+    position: relative;
+}
+
+.column + .column { /*set the gutter */
+    margin-left: 1.6%;
 }
 
 
